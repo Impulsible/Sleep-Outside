@@ -1,23 +1,20 @@
-// wrapper for querySelector...returns matching element
-export function qs(selector, parent = document) {
-  return parent.querySelector(selector);
-}
-// or a more concise version if you are into that sort of thing:
-// export const qs = (selector, parent = document) => parent.querySelector(selector);
+export async function loadHeaderFooter() {
+  const header = document.getElementById('header');
+  const footer = document.getElementById('footer');
 
-// retrieve data from localstorage
-export function getLocalStorage(key) {
-  return JSON.parse(localStorage.getItem(key));
+  if (header) {
+    const headerHTML = await fetch('/partials/header.html').then(res => res.text());
+    header.innerHTML = headerHTML;
+  }
+
+  if (footer) {
+    const footerHTML = await fetch('/partials/footer.html').then(res => res.text());
+    footer.innerHTML = footerHTML;
+  }
 }
-// save data to local storage
-export function setLocalStorage(key, data) {
-  localStorage.setItem(key, JSON.stringify(data));
-}
-// set a listener for both touchend and click
-export function setClick(selector, callback) {
-  qs(selector).addEventListener("touchend", (event) => {
-    event.preventDefault();
-    callback();
-  });
-  qs(selector).addEventListener("click", callback);
+
+// Utility to get URL parameters
+export function getParam(name) {
+  const urlParams = new URLSearchParams(window.location.search);
+  return urlParams.get(name);
 }
