@@ -5,6 +5,7 @@ export default class ProductData {
     // No category needed here; will be passed in getData
   }
 
+  // Fetch all products for a given category
   async getData(category) {
     try {
       const response = await fetch(`${baseURL}products/search/${category}`);
@@ -16,6 +17,7 @@ export default class ProductData {
     }
   }
 
+  // Fetch a single product by ID
   async getProductById(id) {
     try {
       const response = await fetch(`${baseURL}product/${id}`);
