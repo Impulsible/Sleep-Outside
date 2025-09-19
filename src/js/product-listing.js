@@ -19,3 +19,5 @@ const myList = new ProductList(category, dataSource, listElement);
 
 // Initialize rendering
 myList.init();
+
+document.querySelector('.page-title').textContent = `Top Products: ${category}`;
