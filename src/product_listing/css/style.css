@@ -485,66 +485,116 @@ footer {
   }
 }
 
-/* Product Detail Layout */
-.detail-card {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  align-items: start;
-  padding: 2rem;
-  background: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  margin: 2rem auto;
-  max-width: 1000px;
-}
+/* ================================
+   PRODUCT DETAIL PAGE STYLES
+================================== */
 
-.detail-card .detail-image img {
-  width: 100%;
-  height: auto;
-  border-radius: 0.5rem;
-}
-
-.detail-card .detail-meta {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.detail-card .detail-meta h1 {
-  font-size: 2rem;
-  margin: 0;
-  color: var(--primary-color, #2c3e50);
-}
-
-.detail-card .detail-meta .price {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--highlight-color, #006400);
-}
-
-.detail-card .detail-meta .description {
-  line-height: 1.6;
-  color: #333;
+.product-detail-page {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
 }
 
 .breadcrumb {
-  margin: 1rem 2rem;
+  margin-bottom: 1.5rem;
   font-size: 0.9rem;
 }
 
 .breadcrumb a {
-  text-decoration: none;
   color: var(--primary-color, #2c3e50);
+  text-decoration: none;
 }
 
 .breadcrumb a:hover {
   text-decoration: underline;
 }
 
-/* Mobile: stack layout */
-@media (max-width: 768px) {
+/* Main Detail Card */
+.detail-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2.5rem;
+  background: #fff;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  padding: 2rem;
+  align-items: start;
+  animation: fadeIn 0.4s ease-in;
+}
+
+/* Image Section */
+.detail-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Text/Meta Section */
+.detail-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.detail-meta h1 {
+  font-size: 2.2rem;
+  margin: 0;
+  color: var(--primary-color, #2c3e50);
+}
+
+.detail-meta .price {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--highlight-color, #006400);
+}
+
+.detail-meta .description {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+/* Call-to-action Button */
+.detail-meta .cta {
+  margin-top: 1.5rem;
+}
+
+.detail-meta .cta button {
+  background: var(--highlight-color, #006400);
+  color: #fff;
+  padding: 0.9rem 1.8rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.detail-meta .cta button:hover {
+  background: #004d00;
+}
+
+/* Responsive Layout */
+@media (max-width: 900px) {
   .detail-card {
     grid-template-columns: 1fr;
+    padding: 1.5rem;
   }
+
+  .detail-meta h1 {
+    font-size: 1.8rem;
+  }
+
+  .detail-meta .price {
+    font-size: 1.4rem;
+  }
+}
+
+/* Simple fade-in animation */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(15px); }
+  to { opacity: 1; transform: translateY(0); }
 }

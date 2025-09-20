@@ -1,23 +1,18 @@
+// js/product-listing.js
 import ProductData from './ProductData.mjs';
-import ProductList from './ProductList.js';
-import { loadHeaderFooter, getParam } from './utils.mjs';
+import ProductList from './ProductList.mjs';
+import { getParam } from './utils.mjs';
 
-// Load header and footer
-loadHeaderFooter();
+(async () => {
+  const category = getParam('category') || 'tents';
+  const listElement = document.querySelector('.product-list');
+  const dataSource = new ProductData();
+  const myList = new ProductList(category, dataSource, listElement);
+  await myList.init();
 
-// Get category from URL
-const category = getParam('category');
-
-// Create ProductData instance
-const dataSource = new ProductData();
-
-// Select container element
-const listElement = document.querySelector('.product-list');
-
-// Create ProductList instance
-const myList = new ProductList(category, dataSource, listElement);
-
-// Initialize rendering
-myList.init();
-
-document.querySelector('.page-title').textContent = `Top Products: ${category}`;
+  // Update title
+  function prettyCategory(slug) {
+    return slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+  }
+  document.getElementById('product-title').textContent = `Top Products: ${prettyCategory(category)}`;
+})();
