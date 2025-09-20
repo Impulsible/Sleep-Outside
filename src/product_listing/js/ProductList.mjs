@@ -33,7 +33,7 @@ function pickImage(product, size = 'PrimaryMedium') {
   } catch (e) {
     // fall through
   }
-  return '/images/noun_Backpack_65884.svg';
+  return '/images/placeholder.png';
 }
 
 export default class ProductList {

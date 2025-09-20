@@ -1,13 +1,15 @@
-import { defineConfig } from 'vite'
-import path from 'path'
+// vite.config.js
+import { defineConfig } from 'vite';
+import path from 'path';
 
 export default defineConfig({
-  root: path.resolve(__dirname, 'src/product_listing'), // points to folder with index.html
+  root: path.resolve(__dirname, 'src'),
   build: {
-    outDir: path.resolve(__dirname, 'dist'), // output folder for the build
-    emptyOutDir: true,                        // clears previous build
+    outDir: path.resolve(__dirname, 'dist'),
     rollupOptions: {
-      input: path.resolve(__dirname, 'src/product_listing/index.html') // entry file
+      input: {
+        main: path.resolve(__dirname, 'src/product_listing/index.html')
+      }
     }
   }
-})
+});
