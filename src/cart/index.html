@@ -1,29 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sleep Outside | Cart</title>
-    <link rel="stylesheet" href="/css/style.css">
-  </head>
-  <body>
-    <!-- Dynamic Header -->
-    <header id="header"></header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sleep Outside | Cart</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <!-- Dynamic Header -->
+  <header id="header"></header>
 
-    <main class="divider">
-      <h1>Your Shopping Cart</h1>
-      <div class="cart-items">
-        <p>Your cart is currently empty.</p>
-      </div>
-    </main>
+  <main class="divider">
+    <h1>Your Shopping Cart</h1>
+    <div class="cart-items">
+      <!-- Cart items will be dynamically inserted here -->
+    </div>
+    <div class="cart-summary">
+  <p>Subtotal: $<span id="subtotal">0.00</span></p>
+  <p>Tax (6%): $<span id="tax">0.00</span></p>
+  <p>Shipping: $<span id="shipping">0.00</span></p>
+  <p>Total: $<span id="orderTotal">0.00</span></p>
+  <a href="checkout.html" class="checkout-btn">Go to Checkout</a>
+</div>
 
-    <!-- Dynamic Footer -->
-    <footer id="footer"></footer>
+  </main>
 
-
-    <script type="module">
-      import { loadHeaderFooter } from '../js/utils.mjs';
-      loadHeaderFooter();
-    </script>
-  </body>
+  <!-- Dynamic Footer -->
+  <footer id="footer"></footer>
+</body>
 </html>
