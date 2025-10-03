@@ -1,54 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sleep Outside | Checkout</title>
-    <link rel="stylesheet" href="/src/css/style.css" />
-  </head>
-  <body>
-    <!-- Dynamic Header -->
-    <header id="header"></header>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
 
-    <main class="divider">
-      <h1>Checkout</h1>
-      <form id="checkout-form">
-        <label>
-          Name:
-          <input type="text" name="name" required />
-        </label>
-        <label>
-          Email:
-          <input type="email" name="email" required />
-        </label>
-        <label>
-          Address:
-          <textarea name="address" required></textarea>
-        </label>
-        <button type="submit">Submit Order</button>
-      </form>
+  <h1>Checkout</h1>
 
-      <div class="confirmation-message" style="display:none;">
-        <h2>Thank you for your order!</h2>
-        <p>Your order has been submitted successfully.</p>
-      </div>
-    </main>
+  <form id="checkoutForm">
+    <h2>Customer Info</h2>
+    <label>
+      First Name:
+      <input type="text" name="fname" required>
+    </label>
+    <label>
+      Last Name:
+      <input type="text" name="lname" required>
+    </label>
+    <label>
+      Street Address:
+      <input type="text" name="street" required>
+    </label>
+    <label>
+      City:
+      <input type="text" name="city" required>
+    </label>
+    <label>
+      State:
+      <input type="text" name="state" required>
+    </label>
+    <label>
+      ZIP Code:
+      <input type="text" name="zip" required>
+    </label>
 
-    <!-- Dynamic Footer -->
-    <footer id="footer"></footer>
+    <h2>Payment Info</h2>
+    <label>
+      Credit Card Number:
+      <input type="text" name="cardNumber" required value="1234123412341234">
+    </label>
+    <label>
+      Expiration Date:
+      <input type="text" name="expiration" required value="12/25">
+    </label>
+    <label>
+      Security Code:
+      <input type="text" name="code" required value="123">
+    </label>
 
-    <script type="module">
-      import { loadHeaderFooter } from '../js/utils.mjs';
-      loadHeaderFooter();
+    <button type="submit">Submit Order</button>
+  </form>
 
-      const form = document.getElementById('checkout-form');
-      const confirmation = document.querySelector('.confirmation-message');
+  <div class="order-summary">
+    <h3>Order Summary</h3>
+    <p>Subtotal: $<span id="subtotal">0.00</span></p>
+    <p>Tax (6%): $<span id="tax">0.00</span></p>
+    <p>Shipping: $<span id="shipping">0.00</span></p>
+    <p><strong>Order Total: $<span id="orderTotal">0.00</span></strong></p>
+  </div>
 
-      form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        form.style.display = 'none';
-        confirmation.style.display = 'block';
-      });
-    </script>
-  </body>
+  <div id="checkoutMessage"></div>
+
+  <script type="module">
+   import CheckoutProcess from './checkout/CheckoutProcess.mjs';
+const checkout = new CheckoutProcess('checkoutForm');
+
+// Pre-fill order summary from cart
+const cart = JSON.parse(localStorage.getItem('cart')) || [];
+let subtotal = 0;
+cart.forEach(item => subtotal += Number(item.price) * Number(item.quantity));
+
+document.getElementById('subtotal').textContent = subtotal.toFixed(2);
+document.getElementById('tax').textContent = (subtotal * 0.06).toFixed(2);
+document.getElementById('shipping').textContent = cart.length > 0 ? (10 + (cart.length - 1) * 2).toFixed(2) : '0.00';
+document.getElementById('orderTotal').textContent = (
+  subtotal + subtotal * 0.06 + (cart.length > 0 ? 10 + (cart.length - 1) * 2 : 0)
+).toFixed(2);
+
+</script>
+
+</body>
 </html>
